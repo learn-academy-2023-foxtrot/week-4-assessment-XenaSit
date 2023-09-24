@@ -42,8 +42,11 @@ describe ("removeAndShuffle", () => {
     // expect(["purple", "blue", "green", "yellow", "pink"]).toEqual(expect.removeAndShuffle(colors1))
     // TypeError: expect.removeAndShuffle is not a function
 
-    expect(removeAndShuffle(colors1)).toHaveLength(4)
-    expect(removeAndShuffle(colors2)).toHaveLength(5)
+    // expect(removeAndShuffle(colors1)).toHaveLength(4)
+    // expect(removeAndShuffle(colors2)).toHaveLength(5)
+
+    expect(removeAndShuffle(colors1)).toEqual(expect.arrayContaining(["yellow", "blue", "pink", "green"]))
+    expect(removeAndShuffle(colors2)).toEqual(expect.arrayContaining(["saffron", "aquamarine", "periwinkle", "indigo", "ochre"]))
   })
 })
 
@@ -77,25 +80,17 @@ const removeAndShuffle = (thing) => {
 
 // a) Create a test with expect statements for each of the variables provided.
 
-describe("subtract", () => {
+describe("tally", () => {
 
-  const votes1 = { 
-    upVotes: 13, 
-    downVotes: 2, 
-    tallyReturn : function () {
-      return this.upVotes - this.downVotes}}
+  const votes1 = { upVotes: 13, downVotes: 2 }
   // Expected output: 11
   
-  const votes2 = { 
-    upVotes: 2, 
-    downVotes: 33,
-    tallyReturn : function () {
-      return this.upVotes - this.downVotes}}
+  const votes2 = { upVotes: 2, downVotes: 33 }
   // Expected output: -31
 
   it("takes in an object that contains up votes and down votes and returns the end tally", () => {
-    expect(votes1.tallyReturn()).toEqual(11)
-    expect(votes2.tallyReturn()).toEqual(-31)
+    expect(tally(votes1)).toEqual(11)
+    expect(tally(votes2)).toEqual(-31)
   })
 })
 
@@ -103,36 +98,16 @@ describe("subtract", () => {
 
 // Pseudo code:
 
-// INPUT: variable with an object and a function inside
-// FUNCTION_NAME: tallyReturn
-// OUTPUT: a number tally
-// PROCESS #1:
-// 1) create a function named tallyReturn
+// INPUT: object 
+// FUNCTION_NAME: tally
+// OUTPUT: number
+// PROCESS:
+// 1) create a function named tally
 // 2) return the key:value1-key:value2
-// 3) downside of this function is that it is not reusable because it is inside the object, however it is D.R.Y.
 
-
-// PROCESS #2: 
-// 1) make reusable function outside an obj
-// 2) dont't know how to call the key:value
-// 3) it responded with NaN,
-
-// const tally = {
-//   tallyReturn : function () {
-//     return this.upVotes - this.downVotes
-//   }
-// }
-// console.log(tally.tallyReturn(votes1)); //NaN
-
-
-// PROCESS #3:
-// 1) create simple function named subtract, pass in 2 parameters
-// 2)return function subtract 1st parameter from second
-// ##### this function doesn't work because testing it in jest fails for the reason that the key:values are not accessed 
-
-// const subtract = (x, y) => {
-//   return x - y
-// }
+const tally = (object) => { 
+  return object.upVotes - object.downVotes  
+}
 
 // --------------------3) Create a function that takes in two arrays as arguments and returns one array with no duplicate values. STRETCH: Use the spread operator to pass in a dynamic number of arguments.
 
@@ -167,4 +142,3 @@ const takeOutTheDuplex = (...duplex) => {
         return duplex.indexOf(value) == index
     })
   } 
-  // console.log(takeOutTheDuplex([...dataTypesArray1, ...dataTypesArray2]));
