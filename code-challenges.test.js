@@ -119,7 +119,7 @@ describe ("takeOutTheDuplex", () => {
   // Expected output: ["array", "object", "number", "string", "Boolean", "null", "undefined"]
 
   it("returns one array with no duplicate values", () => {
-    expect(takeOutTheDuplex(...dataTypesArray1, ...dataTypesArray2)).toEqual(["array", "object", "number", "string", "Boolean", "null", "undefined"])
+    expect(takeOutTheDuplex(dataTypesArray1, dataTypesArray2)).toEqual(["array", "object", "number", "string", "Boolean", "null", "undefined"])
   })
 })
 
@@ -137,7 +137,8 @@ describe ("takeOutTheDuplex", () => {
 
 // const duplicatesIncluded = dataTypesArray1.concat(dataTypesArray2)
 // console.log(duplicatesIncluded);
-const takeOutTheDuplex = (...duplex) => {
+const takeOutTheDuplex = (duplex1, duplex2) => {
+    var duplex = [...duplex1, ...duplex2]
     return duplex.filter((value, index) => {
         return duplex.indexOf(value) == index
     })
